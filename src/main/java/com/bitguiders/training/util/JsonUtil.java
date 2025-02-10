@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +16,19 @@ import java.io.File;
 @Component
 public class JsonUtil {
 	
+	@Value("${user.file.path1}")
+	String filePath1;
+
     public List<User> readJsonFile(String filePath) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        InputStream inputStream = new ClassPathResource(filePath).getInputStream();
-        return mapper.readValue(inputStream, new TypeReference<List<User>>() {});
+        File file = new File(filePath);
+        if(!file.exists()) {
+        	InputStream inputStream = new ClassPathResource(filePath1).getInputStream();	
+        	List<User> existingUsers =  mapper.readValue(inputStream, new TypeReference<List<User>>() {});
+        	writeJsonFile(filePath,existingUsers);
+        }
+        
+        return mapper.readValue(file, new TypeReference<List<User>>() {});
     }
     
     public void writeJsonFile(String filePath,List<User> dataList) throws IOException {

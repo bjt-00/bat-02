@@ -3,6 +3,7 @@ package com.bitguiders.training.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,4 +23,8 @@ public class UserController {
 		return userService.getUserList();
 	}
 
+	@RequestMapping(value="/training/bat-01/rest/api/user" ,method=RequestMethod.POST)
+	public String add(@RequestBody User newUser) {
+		return userService.add(newUser);
+	}
 }
