@@ -27,4 +27,14 @@ public class UserController {
 	public String add(@RequestBody User newUser) {
 		return userService.add(newUser);
 	}
+
+	@RequestMapping(value="/training/bat-01/rest/api/user" ,method=RequestMethod.PUT)
+	public String update(@RequestBody User newUser) {
+		return userService.update(newUser);
+	}
+
+	@RequestMapping(value="/training/bat-01/rest/api/user" ,method=RequestMethod.DELETE)
+	public String delete(@RequestBody User newUser) {
+		return userService.delete(newUser);
+	}
 }

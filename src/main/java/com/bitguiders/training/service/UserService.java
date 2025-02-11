@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,41 @@ public class UserService {
 		
 		return save(existingUsers,newUser); 
 	}
-	
+
+	public String update(User newUser) {
+		
+		if(null==newUser.getOrderCode()) {
+			return "400 Bad request orderCode is missing";
+		}
+		
+		List<User> existingUsers = getUserList();
+		User existingUser = getExistingUser(existingUsers,newUser);
+		if(null!=existingUser) {
+		  BeanUtils.copyProperties(newUser,existingUser);
+		}else {
+			return "Request denied orderCode doesn't exists.";
+		}
+		
+		return save(existingUsers,newUser); 
+	}
+
+	public String delete(User newUser) {
+		
+		if(null==newUser.getOrderCode()) {
+			return "400 Bad request orderCode is missing";
+		}
+		
+		List<User> existingUsers = getUserList();
+		User existingUser = getExistingUser(existingUsers,newUser);
+		if(null!=existingUser) {
+			existingUsers.remove(existingUser);
+		}else {
+			return "Request denied orderCode doesn't exists.";
+		}
+		save(existingUsers,newUser);
+		return  newUser.getOrderCode()+ " deleted successfully";
+	}
+
 	private User getExistingUser(List<User> existingUsers,User newUser) {
 		for(User user:existingUsers) {
 			if(user.getOrderCode().equals(newUser.getOrderCode())) {
