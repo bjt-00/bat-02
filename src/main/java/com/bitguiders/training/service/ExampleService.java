@@ -2,6 +2,8 @@ package com.bitguiders.training.service;
 
 import org.springframework.stereotype.Service;
 
+import com.bitguiders.training.model.Example;
+
 @Service
 public class ExampleService {
 
@@ -13,5 +15,10 @@ public class ExampleService {
 			message="Valid orderCode:"+orderCode;
 		}
 		return message;
+	}
+	public Example welcome(String userName) {
+		Example example = new Example();
+		example.setMessage("Welcome "+userName);
+		return example;
 	}
 }
