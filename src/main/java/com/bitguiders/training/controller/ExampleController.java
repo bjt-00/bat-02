@@ -17,7 +17,7 @@ public class ExampleController {
 	
 	@RequestMapping(value="/training/bat-01/rest/api/example1" , method=RequestMethod.GET)
 	public String stringReturnExample() {
-		return "String return exampe";
+		return "calculator service";
 	}
 
 	@RequestMapping(value="/training/bat-01/rest/api/example2" , method=RequestMethod.GET)
@@ -34,5 +34,8 @@ public class ExampleController {
 	public Example objectRturnExample(@RequestParam(name="userName", required=true) String userName) {
 		return exampleService.welcome(userName);
 	}
-
+	
 }
+	
+	
+
