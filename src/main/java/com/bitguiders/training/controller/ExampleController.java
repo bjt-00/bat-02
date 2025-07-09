@@ -13,26 +13,26 @@ import com.bitguiders.training.service.ExampleService;
 public class ExampleController {
 	
 	@Autowired
-	ExampleService exampleService;
+	private ExampleService exampleService;
 	
-	@RequestMapping(value="/training/bat-01/rest/api/example1" , method=RequestMethod.GET)
+	@RequestMapping(value="/training/bat-01/rest/api/example" , method=RequestMethod.GET)
 	public String stringReturnExample() {
 		return "calculator service";
 	}
 
-	@RequestMapping(value="/training/bat-01/rest/api/example2" , method=RequestMethod.GET)
+	@RequestMapping(value="/training/bat-01/rest/api/example " , method=RequestMethod.POST)
 	public String requestParamExample1(@RequestParam(name="userName", required=true) String userName) {
-		return "Welcome "+userName;
+		return "Welcome "+userName;//Added concatenation operator
 	}
 
-	@RequestMapping(value="/training/bat-01/rest/api/example3" , method=RequestMethod.GET)
+	@RequestMapping(value="/training/bat-01/rest/api/example" , method=RequestMethod.PUT)
 	public String requestParamExample2(@RequestParam(name="orderCode", required=true) int orderCode) {
-		return exampleService.validateOrderCode(orderCode);
+		return exampleService.validateOrderCode(orderCode);// Make sure this method returns a string 
 	}
 
-	@RequestMapping(value="/training/bat-01/rest/api/example4" , method=RequestMethod.GET)
+	@RequestMapping(value="/training/bat-01/rest/api/example" , method=RequestMethod.DELETE)
 	public Example objectRturnExample(@RequestParam(name="userName", required=true) String userName) {
-		return exampleService.welcome(userName);
+		return exampleService.welcome(userName);//Make sure this method returns an Example object
 	}
 	
 }
