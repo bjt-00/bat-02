@@ -20,7 +20,7 @@ public class ExampleController {
 		return "calculator service";
 	}
 
-	@RequestMapping(value="/training/bat-01/rest/api/example " , method=RequestMethod.POST)
+	@RequestMapping(value="/training/bat-01/rest/api/example" , method=RequestMethod.POST)
 	public String requestParamExample1(@RequestParam(name="userName", required=true) String userName) {
 		return "Welcome "+userName;//Added concatenation operator
 	}
